@@ -1,8 +1,8 @@
 #include <Arduino.h>
-#include <Wire.h>
 #include <Servo.h>
 #include "LCD_display.h"
 #include "potentiometer.h"
+#include "keypad_manager.h"
 // put function declarations here:
 int myFunction(int, int);
 
