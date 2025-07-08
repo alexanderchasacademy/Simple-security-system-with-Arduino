@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <Keypad.h>
+#include "LCD_display.h"
 
 const byte ROWS = 4;
 const byte COLS = 4;
