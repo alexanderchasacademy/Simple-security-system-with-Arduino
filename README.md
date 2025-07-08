@@ -8,8 +8,11 @@ This project implements a simple motion-based security system using an Arduino m
 - A PIR motion sensor to detect movement  
 - A buzzer to signal an alarm  
 - An I2C LCD screen for user feedback  
-- Two LEDs to indicate system states (e.g., armed/disarmed)  
+- A LED to indicate system states (e.g., armed/disarmed)  
 - A keypad for arming/disarming the system with a password  
 - Serial and/or Wi-Fi logging using the Arduino UNO R4 WiFi  
 
 The goal is to strengthen skills in embedded programming, hardware interfacing, and overall project execution. From design to deployment.
+
+You can find the Software Requirements Specification for the project in the docs folder, or by clicking [here](docs/Software_Requirements_Specification.md).
+

@@ -65,7 +65,7 @@ This is a self-contained system running on the Arduino UNO R4 WiFi, which featur
 | FR4 | LCD Feedback | Display prompts, status, and feedback using I2C LCD |
 | FR5 | Log Event Serial | Send alarm trigger events over USB Serial to host |
 | FR6 | Log Event Wi-Fi | Send alarm event (with optional timestamp) to a remote system via HTTP POST or MQTT |
-| FR7 | LED Status | Use LEDs to show armed (ON) / disarmed (OFF) |
+| FR7 | LED Status | Use LED to show armed (ON) / disarmed (OFF) |
 | FR8 | Lockout | Lock system after 3 failed password attempts (optional timeout) |
 | FR9 | Time Logging | Use RTC or millis-based uptime counter for timestamps |
 
