@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <Servo.h>
+#include "servo_manager.h"
 #include "LCD_display.h"
 #include "potentiometer.h"
 #include "keypad_manager.h"
