@@ -13,6 +13,7 @@ extern const byte password_length;
 
 void reset_attempt_password();
 void check_password_correctness();
+void print_password_LCD();
 void process_password_key();
 
 #endif

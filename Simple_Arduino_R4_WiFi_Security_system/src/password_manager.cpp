@@ -20,6 +20,19 @@ void check_password_correctness()
     }
 }
 
+void print_password_LCD()
+{
+    char masked_password[password_length + 1];
+    
+    for (byte i = 0; i < password_index; i++) {
+        masked_password[i] = '*';
+    }
+    masked_password[password_index] = '\0';
+
+    write_to_LCD("Input password:", 0);
+    write_to_LCD(masked_password, 1);
+}
+
 void process_password_key()
 {
     char key = read_key();
@@ -68,5 +81,7 @@ void process_password_key()
             }
             break;
         }
+
+        print_password_LCD();
     }
 }
