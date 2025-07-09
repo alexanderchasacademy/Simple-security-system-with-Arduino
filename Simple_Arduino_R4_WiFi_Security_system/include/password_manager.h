@@ -5,11 +5,22 @@
 #include "secrets.h"
 #include "keypad_manager.h"
 #include "LCD_display.h"
+#include "buzzer.h"
 
 extern byte password_index;
 extern bool correct_password;
 extern char password_attempt[];
 extern const byte password_length;
+
+extern const int key_press_tune;
+extern const int correct_password_tune;
+extern const int invalid_button_tune;
+extern const int incorrect_password_tune;
+
+extern const int key_press_tune_duration;
+extern const int correct_password_tune_duration;
+extern const int invalid_button_tune_duration;
+extern const int incorrect_password_tune_duration;
 
 void reset_attempt_password();
 void check_password_correctness();

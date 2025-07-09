@@ -5,6 +5,16 @@ bool correct_password = false;
 char password_attempt[6] = "";
 const byte password_length = 5;
 
+const int key_press_tune = 1000;
+const int correct_password_tune = 1500;
+const int invalid_button_tune = 500;
+const int incorrect_password_tune = 300;
+
+const int key_press_tune_duration = 50;
+const int correct_password_tune_duration = 100;
+const int invalid_button_tune_duration = 200;
+const int incorrect_password_tune_duration = 500;
+
 void reset_attempt_password()
 {
     memset(password_attempt, 0, sizeof(password_attempt));
@@ -15,9 +25,10 @@ void check_password_correctness()
 {
     if (strcmp(password_attempt, alarm_password) == 0)
     {
-        correct_password = true;
-        reset_attempt_password(); 
+        correct_password = true; 
     }
+
+    reset_attempt_password();
 }
 
 void print_password_LCD()
@@ -39,12 +50,23 @@ void process_password_key()
     
     if (key != NO_KEY && key != '\0')
     {
+
         switch (key)
         {
             case 'a':
             if (password_index == password_length)
             {
                 check_password_correctness();
+
+                if (correct_password)
+                {
+                    play_tune(correct_password_tune, correct_password_tune_duration);
+                }
+
+                else 
+                {
+                    play_tune(incorrect_password_tune, incorrect_password_tune_duration);
+                }
             }
             break;
 
@@ -58,18 +80,22 @@ void process_password_key()
 
             case 'c':
             reset_attempt_password();
+            play_tune(key_press_tune, key_press_tune_duration);
             break;
 
             case 'd':
             invalid_input();
+            play_tune(invalid_button_tune, invalid_button_tune_duration);
             break;
 
             case '#':
             invalid_input();
+            play_tune(invalid_button_tune, invalid_button_tune_duration);
             break;
 
             case '*':
             invalid_input();
+            play_tune(invalid_button_tune, invalid_button_tune_duration);
             break;
 
             default:
@@ -77,7 +103,9 @@ void process_password_key()
             {
                 password_attempt[password_index] = key;
                 password_index++;
-                password_attempt[password_index] = '\0'; 
+                password_attempt[password_index] = '\0';
+                
+                play_tune(invalid_button_tune, invalid_button_tune_duration);
             }
             break;
         }
