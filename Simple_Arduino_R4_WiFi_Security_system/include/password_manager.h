@@ -9,6 +9,7 @@
 extern byte password_index;
 extern bool correct_password;
 extern char password_attempt[];
+extern const byte password_length;
 
 void check_password_correctness();
 void process_password_key();

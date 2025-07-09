@@ -3,6 +3,7 @@
 byte password_index = 0;
 bool correct_password = false;
 char password_attempt[6] = "";
+const byte password_length = 5;
 
 void check_password_correctness()
 {
@@ -20,7 +21,28 @@ void process_password_key()
     {
         switch (key)
         {
-            
+            case 'a':
+            if (password_index == password_length)
+            {
+                check_password_correctness();
+            }
+            break;
+
+            case 'b':
+            if (password_index != 0)
+            {
+                password_index--;
+                password_attempt[password_index] = '\0';
+            }
+            break;
+
+            case 'c':
+            memset(password_attempt, 0, sizeof(password_attempt));
+            password_index = 0;
+            break;
+
+            default:
+            break;
         }
     }
 }
