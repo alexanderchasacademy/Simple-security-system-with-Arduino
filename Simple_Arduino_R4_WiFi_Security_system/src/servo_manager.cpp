@@ -3,7 +3,7 @@
 Servo servo;
 
 byte locked_position = 0;
-byte unlocked_position = 180;
+byte unlocked_position = 120;
 
 void setup_servo(byte pin)
 {

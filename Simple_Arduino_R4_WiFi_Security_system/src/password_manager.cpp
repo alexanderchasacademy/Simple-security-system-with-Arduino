@@ -62,7 +62,7 @@ void process_password_key()
                 {
                     play_tune(correct_password_tune, correct_password_tune_duration);
                 }
-                
+
                 else 
                 {
                     play_tune(incorrect_password_tune, incorrect_password_tune_duration);
@@ -80,18 +80,22 @@ void process_password_key()
 
             case 'c':
             reset_attempt_password();
+            play_tune(key_press_tune, key_press_tune_duration);
             break;
 
             case 'd':
             invalid_input();
+            play_tune(invalid_button_tune, invalid_button_tune_duration);
             break;
 
             case '#':
             invalid_input();
+            play_tune(invalid_button_tune, invalid_button_tune_duration);
             break;
 
             case '*':
             invalid_input();
+            play_tune(invalid_button_tune, invalid_button_tune_duration);
             break;
 
             default:
@@ -99,7 +103,9 @@ void process_password_key()
             {
                 password_attempt[password_index] = key;
                 password_index++;
-                password_attempt[password_index] = '\0'; 
+                password_attempt[password_index] = '\0';
+                
+                play_tune(invalid_button_tune, invalid_button_tune_duration);
             }
             break;
         }
