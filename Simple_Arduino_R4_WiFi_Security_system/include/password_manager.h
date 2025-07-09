@@ -11,6 +11,7 @@ extern bool correct_password;
 extern char password_attempt[];
 extern const byte password_length;
 
+void reset_attempt_password();
 void check_password_correctness();
 void process_password_key();
 
