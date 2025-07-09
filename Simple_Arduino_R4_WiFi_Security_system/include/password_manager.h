@@ -1,0 +1,19 @@
+#ifndef PASSWORD_MANAGER_H
+#define PASSWORD_MANAGER_H
+
+#include <Arduino.h>
+#include "secrets.h"
+#include "keypad_manager.h"
+#include "LCD_display.h"
+
+extern byte password_index;
+extern bool correct_password;
+extern char password_attempt[];
+extern const byte password_length;
+
+void reset_attempt_password();
+void check_password_correctness();
+void print_password_LCD();
+void process_password_key();
+
+#endif

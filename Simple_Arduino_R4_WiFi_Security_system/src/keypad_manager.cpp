@@ -11,3 +11,8 @@ byte rowPins[ROWS] = {13, 12, 11, 10};
 byte colPins[COLS] = {9, 8, 7, 6};
 
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+
+char read_key()
+{
+  return keypad.getKey();
+}

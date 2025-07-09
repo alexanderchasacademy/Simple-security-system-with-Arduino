@@ -3,12 +3,13 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-LiquidCrystal_I2C LCD(0x27, 16, 2);
+extern LiquidCrystal_I2C LCD;
 
-char LCD_message[17];
-char previous_LCD_message_row0[17] = "";
-char previous_LCD_message_row1[17] = "";
+//extern char LCD_message[17];
+extern char previous_LCD_message_row0[17];
+extern char previous_LCD_message_row1[17];
 
 void write_to_LCD(const char* LCD_message, byte row);
+void invalid_input();
 
 #endif
