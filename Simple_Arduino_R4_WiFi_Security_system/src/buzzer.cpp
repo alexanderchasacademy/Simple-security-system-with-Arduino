@@ -10,6 +10,7 @@ void setup_buzzer(byte pin)
 
 void play_tune(unsigned int frequency, unsigned long duration)
 {
+    noTone(buzzer_pin);
     tone(buzzer_pin, frequency, duration);
 }
 
