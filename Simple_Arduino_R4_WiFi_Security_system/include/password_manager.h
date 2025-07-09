@@ -8,6 +8,9 @@
 
 extern byte password_index;
 extern bool correct_password;
+extern char password_attempt[];
 
+void check_password_correctness();
+void process_password_key();
 
 #endif

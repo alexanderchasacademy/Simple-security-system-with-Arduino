@@ -11,4 +11,6 @@ const byte COLS = 4;
 extern char keys[ROWS][COLS];
 extern Keypad keypad;
 
+char read_key();
+
 #endif
