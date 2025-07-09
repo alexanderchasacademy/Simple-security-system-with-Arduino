@@ -5,6 +5,7 @@
 #include "secrets.h"
 #include "keypad_manager.h"
 #include "LCD_display.h"
+#include "buzzer.h"
 
 extern byte password_index;
 extern bool correct_password;
