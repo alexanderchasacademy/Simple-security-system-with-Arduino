@@ -5,6 +5,9 @@ bool correct_password = false;
 char password_attempt[6] = "";
 const byte password_length = 5;
 
+unsigned long last_keypress_time = 0;
+const unsigned long password_input_timeout = 20000;
+
 const int key_press_tune = 1000;
 const int correct_password_tune = 1500;
 const int invalid_button_tune = 500;
@@ -25,7 +28,18 @@ void check_password_correctness()
 {
     if (strcmp(password_attempt, alarm_password) == 0)
     {
-        correct_password = true; 
+        correct_password = true;
+        write_to_LCD("Correct password", 0);
+        write_to_LCD("Access granted", 1);
+        play_tune(correct_password_tune, correct_password_tune_duration);
+    }
+
+    else
+    {
+        correct_password = false;
+        write_to_LCD("Wrong password!", 0);
+        write_to_LCD("Try again", 1);
+        play_tune(incorrect_password_tune, incorrect_password_tune_duration);
     }
 
     reset_attempt_password();
@@ -47,9 +61,17 @@ void print_password_LCD()
 void process_password_key()
 {
     char key = read_key();
+
+    if (millis() - last_keypress_time >= password_input_timeout && password_index > 0)
+    {
+        reset_attempt_password();
+        write_to_LCD("Timeout!", 0);
+        write_to_LCD("Password cleared", 1);
+    }
     
     if (key != NO_KEY && key != '\0')
     {
+        last_keypress_time = millis();
 
         switch (key)
         {
@@ -57,16 +79,13 @@ void process_password_key()
             if (password_index == password_length)
             {
                 check_password_correctness();
+            }
 
-                if (correct_password)
-                {
-                    play_tune(correct_password_tune, correct_password_tune_duration);
-                }
-
-                else 
-                {
-                    play_tune(incorrect_password_tune, incorrect_password_tune_duration);
-                }
+            else
+            {
+                write_to_LCD("Password too short", 0);
+                write_to_LCD("Enter 5 digits", 1);
+                play_tune(invalid_button_tune, invalid_button_tune_duration);
             }
             break;
 
@@ -105,7 +124,7 @@ void process_password_key()
                 password_index++;
                 password_attempt[password_index] = '\0';
                 
-                play_tune(invalid_button_tune, invalid_button_tune_duration);
+                play_tune(key_press_tune, key_press_tune_duration);
             }
             break;
         }
