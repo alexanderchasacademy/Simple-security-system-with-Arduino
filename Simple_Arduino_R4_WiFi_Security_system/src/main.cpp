@@ -6,6 +6,7 @@
 #include "state_manager.h"
 #include "password_manager.h"
 #include "buzzer.h"
+#include "PIR_sensor_manager.h"
 
 void setup() {
   
