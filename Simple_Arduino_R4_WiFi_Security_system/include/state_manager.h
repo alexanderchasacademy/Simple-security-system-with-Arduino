@@ -3,13 +3,14 @@
 
 enum SystemState {
     state_idle,
-    state_alarm_start_grace_period,
+    state_alarm_armed,
+    state_alarm_armed_grace_period,
     state_alarm_triggered,
-    state_alarm_not_triggered,
+    state_disarmed,
+    state_transition_disarmed_to_grace_period,
     state_waiting_for_password,
     state_checking_password,
     state_intrusion_detected,
-    state_disarmed,
     state_error
 };
 

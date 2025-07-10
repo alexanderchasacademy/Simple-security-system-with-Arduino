@@ -9,14 +9,17 @@
 #include "PIR_sensor_manager.h"
 #include "LED_utility.h"
 
-unsigned long timer;
+unsigned long timer = 0;
 const int loop_period_MS = 50;
-unsigned long current_loop;
+unsigned long current_loop = 0;
 
 int high_alarm_activated_frequency = 2000;
 int low_alarm_activated_frequency = 1200;
 int alarm_frequency_duration = 200;
-unsigned long alarm_ringing_timer;
+unsigned long alarm_ringing_timer = 0;
+
+unsigned long grace_period_start = 0;
+const unsigned long grace_period_duration = 10000;
  
 void alarm_ringing();
 void exit_state_alarm_triggered();
@@ -44,10 +47,14 @@ void loop() {
     
     if (current_loop - timer >= loop_period_MS)
     {
-        if (motion_detected)
+
+        if (motion_detected && current_state == state_alarm_armed)
         {
             current_state = state_alarm_triggered;
             set_motion_detected_to_false();
+
+            write_to_LCD("ALARM ACTIVATED:", 0);
+            write_to_LCD("Input password", 1);
         }
 
         switch (current_state)
@@ -55,7 +62,16 @@ void loop() {
             case state_idle:
             break;
 
-            case state_alarm_start_grace_period:
+            case state_transition_disarmed_to_grace_period:
+            current_state = state_alarm_armed_grace_period;
+            grace_period_start = millis();
+            break;
+
+            case state_alarm_armed_grace_period:
+            if (millis() - grace_period_start >= grace_period_duration)
+            {
+                current_state = state_alarm_armed;
+            }
             break;
 
             case state_alarm_triggered:
@@ -71,17 +87,17 @@ void loop() {
             }
             break;
 
-            case state_alarm_not_triggered:
+            case state_alarm_armed:
             break;
 
-            case state_waiting_for_password:
+            /*case state_waiting_for_password:
             break;
 
             case state_checking_password:
             break;
 
             case state_intrusion_detected:
-            break;
+            break;*/
 
             case state_disarmed:
             break;
