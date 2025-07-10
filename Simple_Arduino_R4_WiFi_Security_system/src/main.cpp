@@ -22,7 +22,6 @@ unsigned long grace_period_start = 0;
 const unsigned long grace_period_duration = 10000;
  
 void alarm_ringing();
-//void exit_state_alarm_triggered();
 
 void setup() {
 
@@ -45,6 +44,7 @@ void loop() {
     current_loop = millis();
 
     if (current_loop - timer >= loop_period_MS) {
+
         // Motion triggers alarm if alarm is armed
         if (motion_detected && current_state == state_alarm_armed) {
             current_state = state_transition_armed_to_triggered;
@@ -58,14 +58,17 @@ void loop() {
 
             // === TRANSITION: DISARMED → GRACE PERIOD ===
             case state_transition_disarmed_to_grace_period:
+
                 write_to_LCD("10 sec before", 0);
                 write_to_LCD("alarm activates", 1);
+
                 grace_period_start = millis();
                 current_state = state_alarm_armed_grace_period;
             break;
 
             // === GRACE PERIOD ===
             case state_alarm_armed_grace_period:
+
                 if (millis() - grace_period_start >= grace_period_duration) {
                     current_state = state_transition_to_armed;
                 }
@@ -73,14 +76,19 @@ void loop() {
 
             // === TRANSITION: GRACE PERIOD → ARMED ===
             case state_transition_to_armed:
+
                 write_to_LCD("Alarm status:", 0);
                 write_to_LCD("Activated", 1);
+
                 current_state = state_alarm_armed;
             break;
 
             // === ARMED STATE ===
             case state_alarm_armed:
+                
+                slow_blinking();
                 process_password_key();
+
                 if (correct_password) {
                     current_state = state_transition_to_disarmed;
                 }
@@ -88,15 +96,18 @@ void loop() {
 
             // === TRANSITION: ARMED → TRIGGERED ===
             case state_transition_armed_to_triggered:
+
                 lock_servo();
                 write_to_LCD("ALARM TRIGGERED!", 0);
                 write_to_LCD("Input password", 1);
+
                 alarm_ringing_timer = millis(); // reset buzzer timer
                 current_state = state_alarm_triggered;
             break;
 
             // === ALARM TRIGGERED ===
             case state_alarm_triggered:
+
                 alarm_ringing();
                 fast_blinking();
                 process_password_key();
@@ -108,6 +119,7 @@ void loop() {
 
             // === TRANSITION: ANY → DISARMED ===
             case state_transition_to_disarmed:
+
                 write_to_LCD("Alarm status:", 0);
                 write_to_LCD("Deactivated", 1);
                 stop_buzzer();
@@ -118,6 +130,7 @@ void loop() {
             // === DISARMED STATE ===
             case state_disarmed:
                 process_password_key();
+
                 if (correct_password) {
                     current_state = state_transition_disarmed_to_grace_period;
                 }
@@ -160,8 +173,3 @@ void alarm_ringing()
         alarm_ringing_high_tone = !alarm_ringing_high_tone;
     }
 }
-
-/*void exit_state_alarm_triggered()
-{
-    current_state = state_disarmed;
-}*/

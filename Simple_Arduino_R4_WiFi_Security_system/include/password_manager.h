@@ -12,6 +12,9 @@ extern bool correct_password;
 extern char password_attempt[];
 extern const byte password_length;
 
+extern unsigned long last_keypress_time;
+extern const unsigned long password_input_timeout;
+
 extern const int key_press_tune;
 extern const int correct_password_tune;
 extern const int invalid_button_tune;
