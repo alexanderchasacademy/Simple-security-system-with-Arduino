@@ -1,7 +1,7 @@
 #include "PIR_sensor_manager.h"
 
 byte PIR_pin;
-bool motion_detected = false;
+volatile bool motion_detected = false;
 
 void setup_PIR_sensor(byte pin)
 {

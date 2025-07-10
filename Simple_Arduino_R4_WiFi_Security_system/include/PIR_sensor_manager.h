@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 extern byte PIR_pin;
-extern bool motion_detected;
+extern volatile bool motion_detected;
 
 void setup_PIR_sensor(byte pin);
 byte read_PIR();
