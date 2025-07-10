@@ -19,6 +19,7 @@ int alarm_frequency_duration = 200;
 unsigned long alarm_ringing_timer;
  
 void alarm_ringing();
+void exit_state_alarm_triggered();
 
 void setup() {
 
@@ -61,6 +62,13 @@ void loop() {
             lock_servo();
             alarm_ringing();
             fast_blinking();
+
+            process_password_key();
+
+            if (correct_password)
+            {
+                exit_state_alarm_triggered();
+            }
             break;
 
             case state_alarm_not_triggered:
@@ -112,4 +120,9 @@ void alarm_ringing()
 
         alarm_ringing_high_tone = !alarm_ringing_high_tone;
     }
+}
+
+void exit_state_alarm_triggered()
+{
+    current_state = state_disarmed;
 }
