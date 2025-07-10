@@ -2,17 +2,24 @@
 #define STATE_MANAGER_H
 
 enum SystemState {
-    state_idle,
-    state_alarm_armed,
+    state_idle,                               // Initial idle state
+
+    // Transitions
+    state_transition_disarmed_to_grace_period,
     state_alarm_armed_grace_period,
+    state_transition_to_armed,
+    state_transition_armed_to_triggered,
+    state_transition_to_disarmed,
+
+    // Main operational states
+    state_alarm_armed,
     state_alarm_triggered,
     state_disarmed,
-    state_transition_disarmed_to_grace_period,
-    state_waiting_for_password,
-    state_checking_password,
-    state_intrusion_detected,
+
+    // Fallback
     state_error
 };
+
 
 extern SystemState current_state;
 
