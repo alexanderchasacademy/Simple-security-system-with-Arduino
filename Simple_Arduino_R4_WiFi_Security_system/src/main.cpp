@@ -1,28 +1,10 @@
 #include <Arduino.h>
-#include "servo_manager.h"
-#include "LCD_display.h"
-//#include "potentiometer.h"
-#include "keypad_manager.h"
-#include "state_manager.h"
-#include "password_manager.h"
-#include "buzzer.h"
-#include "PIR_sensor_manager.h"
-#include "LED_utility.h"
+#include "alarm_system_logic.h"
 
 unsigned long timer = 0;
 const int loop_period_MS = 100;
 unsigned long current_loop = 0;
-
-int high_alarm_activated_frequency = 2000;
-int low_alarm_activated_frequency = 1200;
-int alarm_frequency_duration = 200;
-unsigned long alarm_ringing_timer = 0;
-
-unsigned long grace_period_start = 0;
-const unsigned long grace_period_duration = 10000;
  
-void alarm_ringing();
-
 void setup() {
 
     setup_LCD();
@@ -41,6 +23,7 @@ void setup() {
 }
 
 void loop() {
+    
     current_loop = millis();
 
     if (current_loop - timer >= loop_period_MS) {
@@ -154,25 +137,4 @@ void loop() {
     }
 }
 
-void alarm_ringing()
-{
 
-    static bool alarm_ringing_high_tone = true;
-
-    if (millis() - alarm_ringing_timer >= alarm_frequency_duration)
-    {
-        alarm_ringing_timer += alarm_frequency_duration;
-
-        if (alarm_ringing_high_tone)
-        {
-            play_tune(high_alarm_activated_frequency);
-        }
-
-        else 
-        {
-            play_tune(low_alarm_activated_frequency);
-        }
-
-        alarm_ringing_high_tone = !alarm_ringing_high_tone;
-    }
-}
