@@ -3,8 +3,9 @@
 
 enum SystemState {
     state_idle,
-    STATE_WAITING_FOR_PASSWORD,
-    STATE_VALIDATING_PASSWORD,
+    state_alarm_start_grace_period,
+    state_alarm_active,
+    state_alarm_not_active,
     STATE_ACCESS_GRANTED,
     STATE_ACCESS_DENIED,
     STATE_LOCKED_OUT

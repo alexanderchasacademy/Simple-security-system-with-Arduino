@@ -27,3 +27,9 @@ void invalid_input()
   write_to_LCD("Invalid input", 0);
   write_to_LCD("please try again", 1);
 }
+
+void setup_LCD() {
+    LCD.init();
+    LCD.backlight();
+    LCD.clear();
+}
