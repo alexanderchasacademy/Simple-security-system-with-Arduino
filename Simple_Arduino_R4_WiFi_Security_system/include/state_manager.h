@@ -2,7 +2,7 @@
 #define STATE_MANAGER_H
 
 enum SystemState {
-    state_idle,                               // Initial idle state
+    state_idle,                               
 
     // Transitions
     state_transition_disarmed_to_grace_period,

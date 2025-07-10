@@ -91,6 +91,7 @@ void loop() {
 
                 if (correct_password) {
                     current_state = state_transition_to_disarmed;
+                    correct_password = false;
                 }
             break;
 
@@ -114,6 +115,7 @@ void loop() {
 
                 if (correct_password) {
                     current_state = state_transition_to_disarmed;
+                    correct_password = false;
                 }
             break;
 
@@ -133,6 +135,7 @@ void loop() {
 
                 if (correct_password) {
                     current_state = state_transition_disarmed_to_grace_period;
+                    correct_password = false;
                 }
             break;
 
